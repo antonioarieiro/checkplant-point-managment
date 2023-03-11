@@ -1,10 +1,12 @@
 import React from 'react';
-
+import MapContainer from './components/MapContainer'
 function App() {
   return (
-    <div className="App">
-     ola
+    <>
+     <div style={{ height: '100vh', width: '100%' }}>
+      <MapContainer />
     </div>
+    </>
   );
 }
 
