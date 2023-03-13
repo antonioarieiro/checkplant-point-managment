@@ -9,5 +9,8 @@ export interface Btn {
 export interface MarkerItem {
     lat: number
     lng: number
+    order?: string
+    data?: string
+    hours?: string
   }
   
