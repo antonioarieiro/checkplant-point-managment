@@ -1,10 +1,17 @@
 import React from 'react';
-import MapContainer from './components/MapContainer'
+import MapContainer from './components/Map/MapContainer'
+import Header from './components/Header/Header';
+import'./app.scss';
 function App() {
   return (
     <>
-     <div style={{ height: '100vh', width: '100%' }}>
+     <div className='app-body'>
+      <div className='min-body'></div>
+      <div className='center-content'>
+      <Header />
       <MapContainer />
+      </div>
+     
     </div>
     </>
   );

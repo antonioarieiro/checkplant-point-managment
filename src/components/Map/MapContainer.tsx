@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleMap, Polygon } from '@react-google-maps/api';
-import { center, mapOptions, mapContainerStyle, polygonPaths } from '../config/MapConfig';
+import { center, mapOptions, mapContainerStyle, polygonPaths, options } from '../../config/MapConfig';
 
 
 const MapContainer: React.FC = () => {
@@ -14,13 +14,7 @@ const MapContainer: React.FC = () => {
     >
       <Polygon
         paths={polygonPaths}
-        options={{
-          strokeColor: '#FF0000',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: '#FF0000',
-          fillOpacity: 0.35,
-        }}
+        options={options}
       />
     </GoogleMap>
   );
