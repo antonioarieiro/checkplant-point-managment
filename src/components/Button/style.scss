@@ -15,3 +15,22 @@
         margin-left: 5px;
     }
 }
+
+.remove-btn {
+    margin-top: 2px;
+    border: none;
+    padding: 7px 2px;
+    background: #bf2020;
+    border-radius: 4px;
+    display: flex;
+    width: 150px;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 11px;
+    color: #FFF;
+    span {
+        margin-left: 5px;
+    }
+}
