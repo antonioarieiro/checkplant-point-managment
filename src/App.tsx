@@ -1,18 +1,9 @@
 import React from 'react';
-import MapContainer from './components/Map/MapContainer'
-import Header from './components/Header/Header';
-import'./app.scss';
+import Map from './pages/Map';
 function App() {
   return (
     <>
-     <div className='app-body'>
-      <div className='min-body'></div>
-      <div className='center-content'>
-      <Header />
-      <MapContainer />
-      </div>
-     
-    </div>
+     <Map/>
     </>
   );
 }
