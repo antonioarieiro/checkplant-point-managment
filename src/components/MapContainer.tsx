@@ -1,16 +1,29 @@
 import React from 'react';
-import { Map, GoogleApiWrapper, IMapProps } from 'google-maps-react';
+import { GoogleMap, Polygon } from '@react-google-maps/api';
+import { center, mapOptions, mapContainerStyle, polygonPaths } from '../config/MapConfig';
 
-const MapContainer: React.FC<IMapProps> = ({ google }) => {
+
+const MapContainer: React.FC = () => {
+
   return (
-    <Map
-      google={google}
-      zoom={14}
-      initialCenter={{ lat: 37.7749, lng: -122.4194 }}
-    />
+    <GoogleMap
+      mapContainerStyle={mapContainerStyle}
+      zoom={18}
+      center={center}
+      options={mapOptions}
+    >
+      <Polygon
+        paths={polygonPaths}
+        options={{
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35,
+        }}
+      />
+    </GoogleMap>
   );
 };
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDb5Vqin9Bb_uP_SajLa1_574BPthGnw-U',
-})(MapContainer);
+export default MapContainer
