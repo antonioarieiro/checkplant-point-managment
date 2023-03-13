@@ -14,8 +14,8 @@ export const options = {
 export const mapOptions = {
     mapTypeId: "satellite",
     mapTypeControl: false,
-   // zoomControl: false,
-    //draggable: false
+    zoomControl: false,
+    draggable: false
   }
   
 export const center = {
@@ -28,3 +28,12 @@ export const mapContainerStyle = {
     height: '100vh',
   };
   
+
+export const polygonPaths = [
+    { lat: center.lat + 0.001, lng: center.lng - 0.001 },
+    { lat: center.lat + 0.002, lng: center.lng },
+    { lat: center.lat + 0.001, lng: center.lng + 0.001 },
+    { lat: center.lat - 0.001, lng: center.lng + 0.001 },
+    { lat: center.lat - 0.002, lng: center.lng },
+    { lat: center.lat - 0.001, lng: center.lng - 0.001 },
+  ];
