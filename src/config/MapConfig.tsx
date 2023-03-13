@@ -16,6 +16,7 @@ export const mapOptions = {
     mapTypeControl: false,
    // zoomControl: false,
     draggable: false
+    
   }
   
 export const center = {
@@ -25,7 +26,7 @@ export const center = {
   
 export const mapContainerStyle = {
     width: '100vw',
-    height: '100vh',
+    height: '89vh',
   };
   
 

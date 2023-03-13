@@ -1,12 +1,6 @@
 import React from 'react';
+import { Btn } from '../../interfaces';
 import  './style.scss'
-
-interface Btn {
-    text: string
-    type: string
-    children: React.ReactNode;
-    click: (e: any) => void;
-}
 
 const Button: React.FC<Btn> = ({text, type, children, click}) => {
     return (
