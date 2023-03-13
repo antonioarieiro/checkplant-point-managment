@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import Button from '../Button/AddBtn';
+import ListContainer from '../ListContainer/ListContainer';
 import { GoogleMap, Polygon, Marker } from '@react-google-maps/api';
 import { center, mapOptions, mapContainerStyle, polygonPaths, options } from '../../config/MapConfig';
 import { MarkerItem } from '../../interfaces';
 
 const MapContainer: React.FC = () => {
   const [markers, setMarkers] = useState<google.maps.LatLngLiteral[]>([]);
+  const [literalData, setLiteralData] = useState<MarkerItem[]>([])
   const [addMarker, setAddMarker] = useState<boolean>(false);
   const [selectedMarker, setSelectedMarker] = useState<MarkerItem | null>();
+  const [acc, setAcc] = useState<number>(1);
 
   const iconBase = 'https://i.ibb.co/QXcSVn8/Regular-on-Move-off-1-1.png';
   const selectedIcon = 'https://i.ibb.co/qsK4w1b/Regular-off-Move-on.png';
@@ -16,7 +19,18 @@ const MapContainer: React.FC = () => {
     if(addMarker) {
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
+      let order = acc + 1;
+      setAcc(order)
+      let orderFormatted = acc.toString().padStart(3, '0');
+      let dataAtual = new Date();
+      let dia = dataAtual.getDate().toString().padStart(2, '0');
+      let mes = (dataAtual.getMonth() + 1).toString().padStart(2, '0');
+      let ano = dataAtual.getFullYear();
+      let data = dia + '/' + mes + '/' + ano;
+      let hours = dataAtual.toLocaleString('pt-BR', {timeZone: 'America/Sao_Paulo'});
+      hours = hours.replace(',', '');
       setMarkers([...markers, { lat, lng }]);
+      setLiteralData([...literalData, { lat, lng, order: orderFormatted, data, hours }]);
       setAddMarker(false);
       setSelectedMarker(null);
     }
@@ -36,18 +50,26 @@ const MapContainer: React.FC = () => {
 
   const removeMarker = () =>  {
     const filter = markers.filter(marker => marker !== selectedMarker);
+    if(selectedMarker) {
+      const filterData = literalData.filter((marker) =>    marker.lat !== selectedMarker.lat && marker.lng !== selectedMarker.lng )
+      setLiteralData(filterData)
+    }
     setMarkers(filter);
     setSelectedMarker(null)
   }
 
   const removeAllMarker = () => {
     setMarkers([]);
+    setLiteralData([])
     setSelectedMarker(null);
   }
 
   return (
    <>
     <div>
+      <section  className='list-section'>
+        <ListContainer literalData={literalData}/>
+      </section>
     <section className='btn-secion'>
          <>
           <Button text={'ADICIONAR NOVO'} type={'add'} click={addNewPoint} >
@@ -64,12 +86,12 @@ const MapContainer: React.FC = () => {
           </Button>
        }
        {
-       markers && markers.length > 0 && 
-        <Button text={'DELETAR TODOS'} type={'remove'} click={removeAllMarker} >
-        <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0.857143 12.6875C0.857143 13.4258 1.41964 14 2.14286 14H9.85714C10.5536 14 11.1429 13.4258 11.1429 12.6875V3.5H0.857143V12.6875ZM8.14286 5.6875C8.14286 5.46875 8.33036 5.25 8.57143 5.25C8.78571 5.25 9 5.46875 9 5.6875V11.8125C9 12.0586 8.78571 12.25 8.57143 12.25C8.33036 12.25 8.14286 12.0586 8.14286 11.8125V5.6875ZM5.57143 5.6875C5.57143 5.46875 5.75893 5.25 6 5.25C6.21429 5.25 6.42857 5.46875 6.42857 5.6875V11.8125C6.42857 12.0586 6.21429 12.25 6 12.25C5.75893 12.25 5.57143 12.0586 5.57143 11.8125V5.6875ZM3 5.6875C3 5.46875 3.1875 5.25 3.42857 5.25C3.64286 5.25 3.85714 5.46875 3.85714 5.6875V11.8125C3.85714 12.0586 3.64286 12.25 3.42857 12.25C3.1875 12.25 3 12.0586 3 11.8125V5.6875ZM11.5714 0.875H8.57143L8.25 0.246094C8.16964 0.109375 8.03571 0 7.875 0H4.09821C3.9375 0 3.80357 0.109375 3.72321 0.246094L3.42857 0.875H0.428571C0.1875 0.875 0 1.09375 0 1.3125V2.1875C0 2.43359 0.1875 2.625 0.428571 2.625H11.5714C11.7857 2.625 12 2.43359 12 2.1875V1.3125C12 1.09375 11.7857 0.875 11.5714 0.875Z" fill="white"/>
-        </svg>
-      </Button>
+        markers && markers.length > 0 && 
+          <Button text={'DELETAR TODOS'} type={'remove'} click={removeAllMarker} >
+            <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.857143 12.6875C0.857143 13.4258 1.41964 14 2.14286 14H9.85714C10.5536 14 11.1429 13.4258 11.1429 12.6875V3.5H0.857143V12.6875ZM8.14286 5.6875C8.14286 5.46875 8.33036 5.25 8.57143 5.25C8.78571 5.25 9 5.46875 9 5.6875V11.8125C9 12.0586 8.78571 12.25 8.57143 12.25C8.33036 12.25 8.14286 12.0586 8.14286 11.8125V5.6875ZM5.57143 5.6875C5.57143 5.46875 5.75893 5.25 6 5.25C6.21429 5.25 6.42857 5.46875 6.42857 5.6875V11.8125C6.42857 12.0586 6.21429 12.25 6 12.25C5.75893 12.25 5.57143 12.0586 5.57143 11.8125V5.6875ZM3 5.6875C3 5.46875 3.1875 5.25 3.42857 5.25C3.64286 5.25 3.85714 5.46875 3.85714 5.6875V11.8125C3.85714 12.0586 3.64286 12.25 3.42857 12.25C3.1875 12.25 3 12.0586 3 11.8125V5.6875ZM11.5714 0.875H8.57143L8.25 0.246094C8.16964 0.109375 8.03571 0 7.875 0H4.09821C3.9375 0 3.80357 0.109375 3.72321 0.246094L3.42857 0.875H0.428571C0.1875 0.875 0 1.09375 0 1.3125V2.1875C0 2.43359 0.1875 2.625 0.428571 2.625H11.5714C11.7857 2.625 12 2.43359 12 2.1875V1.3125C12 1.09375 11.7857 0.875 11.5714 0.875Z" fill="white"/>
+            </svg>
+        </Button>
        }
          </>
           

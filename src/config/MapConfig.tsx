@@ -15,7 +15,7 @@ export const mapOptions = {
     mapTypeId: "satellite",
     mapTypeControl: false,
    // zoomControl: false,
-    draggable: false
+    //draggable: false
     
   }
   
