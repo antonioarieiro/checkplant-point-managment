@@ -3,6 +3,7 @@ export interface Btn {
     type: string
     children: React.ReactNode;
     click: (e: any) => void;
+    addMarker?: boolean
 }
 
 
