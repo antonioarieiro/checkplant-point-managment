@@ -16,7 +16,7 @@ const ListContainer: React.FC<literalData> = ({literalData}) => {
                     <>
                     {
                     literalData?.map((value: MarkerItem, i :number) => (
-                        <div  key={i}>
+                        <div className="body-item"  key={i}>
                            <div className="body-header">
                            <p>Ponto nº </p> 
                            <p>&nbsp; {value.order}</p>

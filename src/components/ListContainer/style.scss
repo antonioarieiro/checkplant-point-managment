@@ -18,7 +18,18 @@
         }
     }
 
+    .body-item {
+         &:hover {
+            p, span {
+                color: #fff;
+            }
+            background: #aeade9;
+            padding: 1px;
+            color: #fff;
+        }
+    }
     .list-items-body {
+         cursor: pointer;
         overflow-y: auto;
         max-height: 300px;
         display: flex;
@@ -35,6 +46,7 @@
                 font-family: sans-serif;
                 font-size: 14px;
             }
+           
         }
         .data-info {
             align-items: center;
@@ -43,8 +55,10 @@
             font-family: sans-serif;
             font-size: 12px;
             color: #5c5959;
+            
            
         }
+        
     }
 
     .none-items {
